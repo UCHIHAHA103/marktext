@@ -23,15 +23,16 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 14
-          check-latest: true
+          node-version: 16
+          check-latest: false
           cache: yarn
           cache-dependency-path: yarn.lock
 
       # Workaround: Fix native build failure due to outdated node-gyp version.
+      # node-gyp@10+ requires Node 18+, pin to 9.x which supports Node 14/16
       - name: Fix node-gyp
         run: |
-          npm install --global node-gyp@latest
+          npm install --global node-gyp@9
           npm prefix -g | % {npm config set node_gyp "$_\node_modules\node-gyp\bin\node-gyp.js"}
           node-gyp install
         shell: pwsh
