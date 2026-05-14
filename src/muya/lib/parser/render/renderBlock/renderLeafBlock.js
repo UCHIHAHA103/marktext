@@ -131,7 +131,6 @@ export default function renderLeafBlock (parent, block, activeBlocks, matches, u
         selector += `.${CLASS_OR_ID.AG_HTML_PREVIEW}`
         Object.assign(data.attrs, { spellcheck: 'false' })
 
-        const { disableHtml } = this.muya.options
         // HTML blocks should always render HTML regardless of the global disableHtml setting
         const htmlContent = sanitize(code, PREVIEW_DOMPURIFY_CONFIG, false)
 
