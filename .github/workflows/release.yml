@@ -7,7 +7,7 @@ on:
 
 jobs:
   windows:
-    runs-on: windows-latest
+    runs-on: windows-2019
     continue-on-error: false
     timeout-minutes: 60
 
@@ -59,14 +59,7 @@ jobs:
           key: ${{ runner.os }}-electron-builder-cache-v1-${{ hashFiles(format('{0}{1}', github.workspace, '\yarn.lock')) }}
 
       - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile --ignore-scripts
-
-      - name: Rebuild native modules for Electron
-        env:
-          npm_config_msvs_version: '2022'
-          GYP_MSVS_VERSION: '2022'
-        run: node_modules/.bin/electron-rebuild --force --types prod,dev --module-dir .
-        shell: pwsh
+        run: yarn install --check-files --frozen-lockfile
 
       - name: Lint
         run: |
