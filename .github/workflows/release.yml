@@ -7,7 +7,7 @@ on:
 
 jobs:
   windows:
-    runs-on: windows-2019
+    runs-on: windows-2022
     continue-on-error: false
     timeout-minutes: 60
 
@@ -15,6 +15,11 @@ jobs:
       MARKTEXT_IS_STABLE: 1
       MARKTEXT_EXIT_ON_ERROR: 1
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # Native module build configuration for VS2022
+      GYP_MSVS_VERSION: 2022
+      npm_config_msvs_version: 2022
+      npm_config_python: python
+      npm_config_build_from_source: true
 
     steps:
       - name: Check out Git repository
@@ -28,23 +33,35 @@ jobs:
           cache: yarn
           cache-dependency-path: yarn.lock
 
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
       # Workaround: Fix native build failure due to outdated node-gyp version.
-      # node-gyp@10+ requires Node 18+, pin to 9.x which supports Node 14/16
+      # node-gyp@10+ requires Node 18+, pin to 9.x which supports Node 16
       - name: Fix node-gyp
         run: |
           npm install --global node-gyp@9
           npm prefix -g | % {npm config set node_gyp "$_\node_modules\node-gyp\bin\node-gyp.js"}
+          npm config set msvs_version 2022
+          npm config set python python
           node-gyp install
         shell: pwsh
+
+      - name: Setup MSBuild (VS2022)
+        uses: microsoft/setup-msbuild@v2
+        with:
+          vs-version: '17.0'
 
       - name: Cache node_modules
         uses: actions/cache@v4
         id: cacheNodeModules
         with:
           path: ${{ github.workspace }}\node_modules
-          key: ${{ runner.os }}-node_modules-cache-v1-${{ hashFiles(format('{0}{1}', github.workspace, '\yarn.lock')) }}
+          key: ${{ runner.os }}-2022-node_modules-cache-v2-${{ hashFiles(format('{0}{1}', github.workspace, '\yarn.lock')) }}
           restore-keys: |
-            ${{ runner.os }}-node_modules-cache-v1-
+            ${{ runner.os }}-2022-node_modules-cache-v2-
 
       - name: Cache Electron
         uses: actions/cache@v4
@@ -60,6 +77,9 @@ jobs:
 
       - name: Install dependencies
         run: yarn install --check-files --frozen-lockfile
+        env:
+          GYP_MSVS_VERSION: 2022
+          npm_config_msvs_version: 2022
 
       - name: Lint
         run: |
