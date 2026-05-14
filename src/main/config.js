@@ -6,7 +6,7 @@ export const editorWinOptions = Object.freeze({
   minWidth: 550,
   minHeight: 350,
   webPreferences: {
-    contextIsolation: false,
+    contextIsolation: true,
     spellcheck: false,
     nodeIntegration: true,
     webSecurity: false
@@ -24,7 +24,7 @@ export const preferencesWinOptions = Object.freeze({
   width: 950,
   height: 650,
   webPreferences: {
-    contextIsolation: false,
+    contextIsolation: true,
     spellcheck: false,
     nodeIntegration: true,
     webSecurity: false

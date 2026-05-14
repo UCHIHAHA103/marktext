@@ -129,7 +129,8 @@ export default function (keybindings) {
         actions.screenshot(browserWindow)
       }
     }, {
-      type: 'separator'
+      type: 'separator',
+      visible: isOsx
     }, {
       label: '行尾换行符',
       submenu: [{

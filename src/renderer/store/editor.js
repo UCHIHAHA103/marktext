@@ -166,7 +166,7 @@ const mutations = {
     if (pathname === currentFile.pathname) {
       state.currentFile = tab
       const { id, cursor, history } = tab
-      bus.$emit('file-changed', { id, markdown, cursor, renderCursor: true, history })
+      bus.$emit('file-changed', { id, markdown, cursor, renderCursor: false, history, preserveScrollPosition: true })
     }
   },
   // NOTE: Please call this function only from main process via "mt::set-pathname" and free resources before!
@@ -191,6 +191,11 @@ const mutations = {
   SET_SAVE_STATUS (state, status) {
     if (hasKeys(state.currentFile)) {
       state.currentFile.isSaved = status
+    }
+  },
+  CLEAR_IGNORE_NEXT_CONTENT_CHANGE_FOR_SAVE_STATUS (state) {
+    if (hasKeys(state.currentFile)) {
+      state.currentFile.ignoreNextContentChangeForSaveStatus = false
     }
   },
   SET_SAVE_STATUS_WHEN_REMOVE (state, { pathname }) {
@@ -894,6 +899,9 @@ const actions = {
 
     const { markdown, isMixedLineEndings } = markdownDocument
     const docState = createDocumentState(Object.assign(markdownDocument, options))
+    // Ignore the first content change from Muya after setMarkdown (e.g. open from search).
+    // Muya re-serializes content and may differ from disk, which would wrongly set isSaved = false.
+    docState.ignoreNextContentChangeForSaveStatus = true
     const { id, cursor } = docState
 
     if (selected) {
@@ -983,22 +991,30 @@ const actions = {
       commit('SET_TOC', toc)
     }
 
-    // Change save status/save to file only when the markdown changed!
-    if (markdown !== oldMarkdown) {
-      commit('SET_SAVE_STATUS', false)
+    // Change save status/save to file only when the markdown actually changed.
+    const oldMarkdownNormalized = adjustTrailingNewlines(oldMarkdown, trimTrailingNewline)
+    if (markdown !== oldMarkdownNormalized) {
+      // Skip setting unsaved when this change came from programmatic setMarkdown (e.g. open from search).
+      if (state.currentFile.ignoreNextContentChangeForSaveStatus) {
+        commit('CLEAR_IGNORE_NEXT_CONTENT_CHANGE_FOR_SAVE_STATUS')
+      } else {
+        commit('SET_SAVE_STATUS', false)
 
-      // Save file is auto save is enable and file exist on disk.
-      if (pathname && autoSave) {
-        const options = getOptionsFromState(state.currentFile)
-        dispatch('HANDLE_AUTO_SAVE', {
-          id: currentId,
-          filename,
-          pathname,
-          markdown,
-          options
-        })
+        // Save file is auto save is enable and file exist on disk.
+        if (pathname && autoSave) {
+          const options = getOptionsFromState(state.currentFile)
+          dispatch('HANDLE_AUTO_SAVE', {
+            id: currentId,
+            filename,
+            pathname,
+            markdown,
+            options
+          })
+        }
       }
     }
+    // Always clear so that the flag only protects the very first change.
+    commit('CLEAR_IGNORE_NEXT_CONTENT_CHANGE_FOR_SAVE_STATUS')
   },
 
   HANDLE_AUTO_SAVE ({ commit, state, rootState }, { id, filename, pathname, markdown, options }) {
@@ -1192,18 +1208,33 @@ const actions = {
               }
             }
 
-            commit('SET_SAVE_STATUS_BY_TAB', { tab, status: false })
-            commit('PUSH_TAB_NOTIFICATION', {
-              tabId: id,
-              msg: `"${filename}" has been changed on disk. Do you want to reload it?`,
-              showConfirm: true,
-              exclusiveType: 'file_changed',
-              action: status => {
-                if (status) {
-                  commit('LOAD_CHANGE', change)
+            // FIX PR #4075: Only mark as unsaved if the file has local unsaved changes.
+            // If the file is already saved, silently load external changes.
+            if (isSaved) {
+              // File is saved, load external changes without prompting
+              commit('LOAD_CHANGE', change)
+              commit('PUSH_TAB_NOTIFICATION', {
+                tabId: id,
+                msg: `"${filename}" has been updated from disk.`,
+                showConfirm: false,
+                exclusiveType: 'file_changed',
+                style: 'info'
+              })
+            } else {
+              // File has unsaved changes, ask user what to do
+              commit('SET_SAVE_STATUS_BY_TAB', { tab, status: false })
+              commit('PUSH_TAB_NOTIFICATION', {
+                tabId: id,
+                msg: `"${filename}" has been changed on disk. Do you want to reload it?`,
+                showConfirm: true,
+                exclusiveType: 'file_changed',
+                action: status => {
+                  if (status) {
+                    commit('LOAD_CHANGE', change)
+                  }
                 }
-              }
-            })
+              })
+            }
             break
           }
           default:
