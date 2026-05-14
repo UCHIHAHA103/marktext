@@ -59,7 +59,11 @@ jobs:
           key: ${{ runner.os }}-electron-builder-cache-v1-${{ hashFiles(format('{0}{1}', github.workspace, '\yarn.lock')) }}
 
       - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: yarn install --check-files --frozen-lockfile --ignore-scripts
+
+      - name: Rebuild native modules for Electron
+        run: node_modules/.bin/electron-rebuild --force --types prod,dev --module-dir .
+        shell: pwsh
 
       - name: Lint
         run: |
