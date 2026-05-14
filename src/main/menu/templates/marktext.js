@@ -8,17 +8,17 @@ export default function (keybindings) {
   return {
     label: 'MarkText',
     submenu: [{
-      label: 'About MarkText',
+      label: '关于 MarkText',
       click (menuItem, browserWindow) {
         showAboutDialog(browserWindow)
       }
     }, {
-      label: 'Check for updates...',
+      label: '检查更新...',
       click (menuItem, browserWindow) {
         actions.checkUpdates(browserWindow)
       }
     }, {
-      label: 'Preferences',
+      label: '偏好设置',
       accelerator: keybindings.getAccelerator('file.preferences'),
       click () {
         actions.userSetting()
@@ -26,32 +26,32 @@ export default function (keybindings) {
     }, {
       type: 'separator'
     }, {
-      label: 'Services',
+      label: '服务',
       role: 'services',
       submenu: []
     }, {
       type: 'separator'
     }, {
-      label: 'Hide MarkText',
+      label: '隐藏 MarkText',
       accelerator: keybindings.getAccelerator('mt.hide'),
       click () {
         Menu.sendActionToFirstResponder('hide:')
       }
     }, {
-      label: 'Hide Others',
+      label: '隐藏其他',
       accelerator: keybindings.getAccelerator('mt.hide-others'),
       click () {
         Menu.sendActionToFirstResponder('hideOtherApplications:')
       }
     }, {
-      label: 'Show All',
+      label: '显示全部',
       click () {
         Menu.sendActionToFirstResponder('unhideAllApplications:')
       }
     }, {
       type: 'separator'
     }, {
-      label: 'Quit MarkText',
+      label: '退出 MarkText',
       accelerator: keybindings.getAccelerator('file.quit'),
       click: app.quit
     }]

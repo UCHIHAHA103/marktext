@@ -29,66 +29,66 @@ const isUpdatable = () => {
 
 export default function () {
   const helpMenu = {
-    label: '&Help',
+    label: '帮助(&H)',
     role: 'help',
     submenu: [{
-      label: 'Quick Start...',
+      label: '快速入门...',
       click () {
         shell.openExternal('https://github.com/marktext/marktext/blob/master/docs/README.md')
       }
     }, {
-      label: 'Markdown Reference...',
+      label: 'Markdown 语法参考...',
       click () {
         shell.openExternal('https://github.com/marktext/marktext/blob/master/docs/MARKDOWN_SYNTAX.md')
       }
     }, {
-      label: 'Changelog...',
+      label: '更新日志...',
       click () {
         shell.openExternal('https://github.com/marktext/marktext/blob/master/.github/CHANGELOG.md')
       }
     }, {
       type: 'separator'
     }, {
-      label: 'Donate via Open Collective...',
+      label: '通过 Open Collective 赞助...',
       click (item, win) {
         shell.openExternal('https://opencollective.com/marktext')
       }
     }, {
-      label: 'Feedback via Twitter...',
+      label: '在 Twitter 上反馈...',
       click (item, win) {
         actions.showTweetDialog(win, 'twitter')
       }
     }, {
-      label: 'Report Issue or Request Feature...',
+      label: '报告问题或请求功能...',
       click () {
         shell.openExternal('https://github.com/marktext/marktext/issues')
       }
     }, {
       type: 'separator'
     }, {
-      label: 'Website...',
+      label: '官网...',
       click () {
         shell.openExternal('https://marktext.app')
       }
     }, {
-      label: 'Watch on GitHub...',
+      label: '在 GitHub 上关注...',
       click () {
         shell.openExternal('https://github.com/marktext/marktext')
       }
     }, {
-      label: 'Follow us on Github...',
+      label: '在 Github 上关注我们...',
       click () {
         shell.openExternal('https://github.com/Jocs')
       }
     }, {
-      label: 'Follow us on Twitter...',
+      label: '在 Twitter 上关注我们...',
       click () {
         shell.openExternal('https://twitter.com/marktextapp')
       }
     }, {
       type: 'separator'
     }, {
-      label: 'License...',
+      label: '许可证...',
       click () {
         shell.openExternal('https://github.com/marktext/marktext/blob/master/LICENSE')
       }
@@ -99,7 +99,7 @@ export default function () {
     helpMenu.submenu.push({
       type: 'separator'
     }, {
-      label: 'Check for updates...',
+      label: '检查更新...',
       click (menuItem, browserWindow) {
         checkUpdates(browserWindow)
       }
@@ -110,7 +110,7 @@ export default function () {
     helpMenu.submenu.push({
       type: 'separator'
     }, {
-      label: 'About MarkText...',
+      label: '关于 MarkText...',
       click (menuItem, browserWindow) {
         actions.showAboutDialog(browserWindow)
       }

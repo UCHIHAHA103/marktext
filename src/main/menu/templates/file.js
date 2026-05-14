@@ -7,16 +7,16 @@ import { isOsx } from '../../config'
 export default function (keybindings, userPreference, recentlyUsedFiles) {
   const { autoSave } = userPreference.getAll()
   const fileMenu = {
-    label: '&File',
+    label: '文件(&F)',
     submenu: [{
-      label: 'New Tab',
+      label: '新建标签页',
       accelerator: keybindings.getAccelerator('file.new-tab'),
       click (menuItem, browserWindow) {
         actions.newBlankTab(browserWindow)
         showTabBar(browserWindow)
       }
     }, {
-      label: 'New Window',
+      label: '新建窗口',
       accelerator: keybindings.getAccelerator('file.new-file'),
       click (menuItem, browserWindow) {
         actions.newEditorWindow()
@@ -24,13 +24,13 @@ export default function (keybindings, userPreference, recentlyUsedFiles) {
     }, {
       type: 'separator'
     }, {
-      label: 'Open File...',
+      label: '打开文件...',
       accelerator: keybindings.getAccelerator('file.open-file'),
       click (menuItem, browserWindow) {
         actions.openFile(browserWindow)
       }
     }, {
-      label: 'Open Folder...',
+      label: '打开文件夹...',
       accelerator: keybindings.getAccelerator('file.open-folder'),
       click (menuItem, browserWindow) {
         actions.openFolder(browserWindow)
@@ -40,7 +40,7 @@ export default function (keybindings, userPreference, recentlyUsedFiles) {
 
   if (!isOsx) {
     const recentlyUsedMenu = {
-      label: 'Open Recent',
+      label: '最近打开',
       submenu: []
     }
 
@@ -57,7 +57,7 @@ export default function (keybindings, userPreference, recentlyUsedFiles) {
       type: 'separator',
       visible: recentlyUsedFiles.length > 0
     }, {
-      label: 'Clear Recently Used',
+      label: '清空最近记录',
       enabled: recentlyUsedFiles.length > 0,
       click (menuItem, browserWindow) {
         actions.clearRecentlyUsed()
@@ -80,19 +80,19 @@ export default function (keybindings, userPreference, recentlyUsedFiles) {
   }, {
     type: 'separator'
   }, {
-    label: 'Save',
+    label: '保存',
     accelerator: keybindings.getAccelerator('file.save'),
     click (menuItem, browserWindow) {
       actions.save(browserWindow)
     }
   }, {
-    label: 'Save As...',
+    label: '另存为...',
     accelerator: keybindings.getAccelerator('file.save-as'),
     click (menuItem, browserWindow) {
       actions.saveAs(browserWindow)
     }
   }, {
-    label: 'Auto Save',
+    label: '自动保存',
     type: 'checkbox',
     checked: autoSave,
     id: 'autoSaveMenuItem',
@@ -102,13 +102,13 @@ export default function (keybindings, userPreference, recentlyUsedFiles) {
   }, {
     type: 'separator'
   }, {
-    label: 'Move To...',
+    label: '移动到...',
     accelerator: keybindings.getAccelerator('file.move-file'),
     click (menuItem, browserWindow) {
       actions.moveTo(browserWindow)
     }
   }, {
-    label: 'Rename...',
+    label: '重命名...',
     accelerator: keybindings.getAccelerator('file.rename-file'),
     click (menuItem, browserWindow) {
       actions.rename(browserWindow)
@@ -116,12 +116,12 @@ export default function (keybindings, userPreference, recentlyUsedFiles) {
   }, {
     type: 'separator'
   }, {
-    label: 'Import...',
+    label: '导入...',
     click (menuItem, browserWindow) {
       actions.importFile(browserWindow)
     }
   }, {
-    label: 'Export',
+    label: '导出',
     submenu: [
       {
         label: 'HTML',
@@ -136,7 +136,7 @@ export default function (keybindings, userPreference, recentlyUsedFiles) {
       }
     ]
   }, {
-    label: 'Print',
+    label: '打印',
     accelerator: keybindings.getAccelerator('file.print'),
     click (menuItem, browserWindow) {
       actions.print(browserWindow)
@@ -145,7 +145,7 @@ export default function (keybindings, userPreference, recentlyUsedFiles) {
     type: 'separator',
     visible: !isOsx
   }, {
-    label: 'Preferences...',
+    label: '偏好设置...',
     accelerator: keybindings.getAccelerator('file.preferences'),
     visible: !isOsx,
     click () {
@@ -154,13 +154,13 @@ export default function (keybindings, userPreference, recentlyUsedFiles) {
   }, {
     type: 'separator'
   }, {
-    label: 'Close Tab',
+    label: '关闭标签页',
     accelerator: keybindings.getAccelerator('file.close-tab'),
     click (menuItem, browserWindow) {
       actions.closeTab(browserWindow)
     }
   }, {
-    label: 'Close Window',
+    label: '关闭窗口',
     accelerator: keybindings.getAccelerator('file.close-window'),
     click (menuItem, browserWindow) {
       actions.closeWindow(browserWindow)
@@ -169,7 +169,7 @@ export default function (keybindings, userPreference, recentlyUsedFiles) {
     type: 'separator',
     visible: !isOsx
   }, {
-    label: 'Quit',
+    label: '退出',
     accelerator: keybindings.getAccelerator('file.quit'),
     visible: !isOsx,
     click: app.quit

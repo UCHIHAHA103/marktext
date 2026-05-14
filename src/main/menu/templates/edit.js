@@ -3,15 +3,15 @@ import { isOsx } from '../../config'
 
 export default function (keybindings) {
   return {
-    label: '&Edit',
+    label: '编辑(&E)',
     submenu: [{
-      label: 'Undo',
+      label: '撤销',
       accelerator: keybindings.getAccelerator('edit.undo'),
       click: (menuItem, browserWindow) => {
         actions.edit(browserWindow, 'undo')
       }
     }, {
-      label: 'Redo',
+      label: '重做',
       accelerator: keybindings.getAccelerator('edit.redo'),
       click: (menuItem, browserWindow) => {
         actions.edit(browserWindow, 'redo')
@@ -19,19 +19,19 @@ export default function (keybindings) {
     }, {
       type: 'separator'
     }, {
-      label: 'Cut',
+      label: '剪切',
       accelerator: keybindings.getAccelerator('edit.cut'),
       click (menuItem, browserWindow) {
         actions.nativeCut(browserWindow)
       }
     }, {
-      label: 'Copy',
+      label: '复制',
       accelerator: keybindings.getAccelerator('edit.copy'),
       click (menuItem, browserWindow) {
         actions.nativeCopy(browserWindow)
       }
     }, {
-      label: 'Paste',
+      label: '粘贴',
       accelerator: keybindings.getAccelerator('edit.paste'),
       click (menuItem, browserWindow) {
         actions.nativePaste(browserWindow)
@@ -39,19 +39,19 @@ export default function (keybindings) {
     }, {
       type: 'separator'
     }, {
-      label: 'Copy as Markdown',
+      label: '复制为 Markdown',
       accelerator: keybindings.getAccelerator('edit.copy-as-markdown'),
       click (menuItem, browserWindow) {
         actions.edit(browserWindow, 'copyAsMarkdown')
       }
     }, {
-      label: 'Copy as HTML',
+      label: '复制为 HTML',
       accelerator: keybindings.getAccelerator('edit.copy-as-html'),
       click (menuItem, browserWindow) {
         actions.edit(browserWindow, 'copyAsHtml')
       }
     }, {
-      label: 'Paste as Plain Text',
+      label: '粘贴为纯文本',
       accelerator: keybindings.getAccelerator('edit.paste-as-plaintext'),
       click (menuItem, browserWindow) {
         actions.edit(browserWindow, 'pasteAsPlainText')
@@ -59,7 +59,7 @@ export default function (keybindings) {
     }, {
       type: 'separator'
     }, {
-      label: 'Select All',
+      label: '全选',
       accelerator: keybindings.getAccelerator('edit.select-all'),
       click (menuItem, browserWindow) {
         actions.edit(browserWindow, 'selectAll')
@@ -67,19 +67,19 @@ export default function (keybindings) {
     }, {
       type: 'separator'
     }, {
-      label: 'Duplicate',
+      label: '复制段落',
       accelerator: keybindings.getAccelerator('edit.duplicate'),
       click (menuItem, browserWindow) {
         actions.edit(browserWindow, 'duplicate')
       }
     }, {
-      label: 'Create Paragraph',
+      label: '新建段落',
       accelerator: keybindings.getAccelerator('edit.create-paragraph'),
       click (menuItem, browserWindow) {
         actions.edit(browserWindow, 'createParagraph')
       }
     }, {
-      label: 'Delete Paragraph',
+      label: '删除段落',
       accelerator: keybindings.getAccelerator('edit.delete-paragraph'),
       click (menuItem, browserWindow) {
         actions.edit(browserWindow, 'deleteParagraph')
@@ -87,25 +87,25 @@ export default function (keybindings) {
     }, {
       type: 'separator'
     }, {
-      label: 'Find',
+      label: '查找',
       accelerator: keybindings.getAccelerator('edit.find'),
       click (menuItem, browserWindow) {
         actions.edit(browserWindow, 'find')
       }
     }, {
-      label: 'Find Next',
+      label: '查找下一个',
       accelerator: keybindings.getAccelerator('edit.find-next'),
       click (menuItem, browserWindow) {
         actions.edit(browserWindow, 'findNext')
       }
     }, {
-      label: 'Find Previous',
+      label: '查找上一个',
       accelerator: keybindings.getAccelerator('edit.find-previous'),
       click (menuItem, browserWindow) {
         actions.edit(browserWindow, 'findPrev')
       }
     }, {
-      label: 'Replace',
+      label: '替换',
       accelerator: keybindings.getAccelerator('edit.replace'),
       click (menuItem, browserWindow) {
         actions.edit(browserWindow, 'replace')
@@ -113,7 +113,7 @@ export default function (keybindings) {
     }, {
       type: 'separator'
     }, {
-      label: 'Find in Folder',
+      label: '在文件夹中查找',
       accelerator: keybindings.getAccelerator('edit.find-in-folder'),
       click (menuItem, browserWindow) {
         actions.edit(browserWindow, 'findInFolder')
@@ -121,7 +121,7 @@ export default function (keybindings) {
     }, {
       type: 'separator'
     }, {
-      label: 'Screenshot',
+      label: '截图',
       id: 'screenshot',
       visible: isOsx,
       accelerator: keybindings.getAccelerator('edit.screenshot'),
@@ -131,18 +131,17 @@ export default function (keybindings) {
     }, {
       type: 'separator'
     }, {
-      // TODO: Remove this menu entry and add it to the command palette (#1408).
-      label: 'Line Ending',
+      label: '行尾换行符',
       submenu: [{
         id: 'crlfLineEndingMenuEntry',
-        label: 'Carriage return and line feed (CRLF)',
+        label: '回车换行 (CRLF)',
         type: 'radio',
         click (menuItem, browserWindow) {
           actions.lineEnding(browserWindow, 'crlf')
         }
       }, {
         id: 'lfLineEndingMenuEntry',
-        label: 'Line feed (LF)',
+        label: '换行 (LF)',
         type: 'radio',
         click (menuItem, browserWindow) {
           actions.lineEnding(browserWindow, 'lf')

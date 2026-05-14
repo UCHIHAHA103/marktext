@@ -2,12 +2,12 @@ import { app, Menu } from 'electron'
 import * as actions from '../actions/file'
 
 const dockMenu = Menu.buildFromTemplate([{
-  label: 'Open...',
+  label: '打开...',
   click (menuItem, browserWindow) {
     actions.openFile(browserWindow)
   }
 }, {
-  label: 'Clear Recent',
+  label: '清空最近记录',
   click () {
     app.clearRecentDocuments()
   }
