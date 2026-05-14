@@ -168,10 +168,19 @@ jobs:
         run: yarn run test
 
       - name: Build and release
-        run: yarn run release:win --publish always
+        run: yarn run release:win --publish never
 
       - name: Calculate checksums
         run: |
           get-filehash -Algorithm SHA256 "build\marktext-setup.exe"
           get-filehash -Algorithm SHA256 "build\marktext-*-win.zip"
         shell: pwsh
+
+      - name: Upload Windows artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: marktext-windows-htmlfix
+          path: |
+            build/marktext-setup.exe
+            build/marktext-*-win.zip
+          retention-days: 30
