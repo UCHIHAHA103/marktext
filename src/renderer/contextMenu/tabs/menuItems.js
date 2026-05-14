@@ -7,7 +7,7 @@ export const SEPARATOR = {
 }
 
 export const CLOSE_THIS = {
-  label: 'Close',
+  label: '关闭',
   id: 'closeThisTab',
   click (menuItem, browserWindow) {
     contextMenu.closeThis(menuItem._tabId)
@@ -15,7 +15,7 @@ export const CLOSE_THIS = {
 }
 
 export const CLOSE_OTHERS = {
-  label: 'Close others',
+  label: '关闭其他标签页',
   id: 'closeOtherTabs',
   click (menuItem, browserWindow) {
     contextMenu.closeOthers(menuItem._tabId)
@@ -23,7 +23,7 @@ export const CLOSE_OTHERS = {
 }
 
 export const CLOSE_SAVED = {
-  label: 'Close saved tabs',
+  label: '关闭已保存标签页',
   id: 'closeSavedTabs',
   click (menuItem, browserWindow) {
     contextMenu.closeSaved()
@@ -31,7 +31,7 @@ export const CLOSE_SAVED = {
 }
 
 export const CLOSE_ALL = {
-  label: 'Close all tabs',
+  label: '关闭所有标签页',
   id: 'closeAllTabs',
   click (menuItem, browserWindow) {
     contextMenu.closeAll()
@@ -39,7 +39,7 @@ export const CLOSE_ALL = {
 }
 
 export const RENAME = {
-  label: 'Rename',
+  label: '重命名',
   id: 'renameFile',
   click (menuItem, browserWindow) {
     contextMenu.rename(menuItem._tabId)
@@ -47,7 +47,7 @@ export const RENAME = {
 }
 
 export const COPY_PATH = {
-  label: 'Copy path',
+  label: '复制路径',
   id: 'copyPath',
   click (menuItem, browserWindow) {
     contextMenu.copyPath(menuItem._tabId)
@@ -55,7 +55,7 @@ export const COPY_PATH = {
 }
 
 export const SHOW_IN_FOLDER = {
-  label: 'Show in folder',
+  label: '在文件夹中显示',
   id: 'showInFolder',
   click (menuItem, browserWindow) {
     contextMenu.showInFolder(menuItem._tabId)

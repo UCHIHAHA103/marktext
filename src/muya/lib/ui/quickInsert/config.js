@@ -34,14 +34,14 @@ const SHIFT_KEY = isOsx ? '⇧' : 'Shift'
 // Fn
 
 export const quickInsertObj = {
-  'basic block': [{
-    title: 'Paragraph',
+  '基本块': [{
+    title: '正文段落',
     subTitle: 'Lorem Ipsum is simply dummy text',
     label: 'paragraph',
     shortCut: `${COMMAND_KEY}+0`,
     icon: paragraphIcon
   }, {
-    title: 'Horizontal Line',
+    title: '分割线',
     subTitle: '---',
     label: 'hr',
     shortCut: `${OPTION_KEY}+${COMMAND_KEY}+-`,
@@ -53,110 +53,110 @@ export const quickInsertObj = {
     shortCut: `${OPTION_KEY}+${COMMAND_KEY}+Y`,
     icon: frontMatterIcon
   }],
-  header: [{
-    title: 'Header 1',
+  '标题': [{
+    title: '一级标题',
     subTitle: '# Lorem Ipsum is simply ...',
     label: 'heading 1',
     shortCut: `${COMMAND_KEY}+1`,
     icon: header1Icon
   }, {
-    title: 'Header 2',
+    title: '二级标题',
     subTitle: '## Lorem Ipsum is simply ...',
     label: 'heading 2',
     shortCut: `${COMMAND_KEY}+2`,
     icon: header2Icon
   }, {
-    title: 'Header 3',
+    title: '三级标题',
     subTitle: '### Lorem Ipsum is simply ...',
     label: 'heading 3',
     shortCut: `${COMMAND_KEY}+3`,
     icon: header3Icon
   }, {
-    title: 'Header 4',
+    title: '四级标题',
     subTitle: '#### Lorem Ipsum is simply ...',
     label: 'heading 4',
     shortCut: `${COMMAND_KEY}+4`,
     icon: header4Icon
   }, {
-    title: 'Header 5',
+    title: '五级标题',
     subTitle: '##### Lorem Ipsum is simply ...',
     label: 'heading 5',
     shortCut: `${COMMAND_KEY}+5`,
     icon: header5Icon
   }, {
-    title: 'Header 6',
+    title: '六级标题',
     subTitle: '###### Lorem Ipsum is simply ...',
     label: 'heading 6',
     shortCut: `${COMMAND_KEY}+6`,
     icon: header6Icon
   }],
-  'advanced block': [{
-    title: 'Table Block',
+  '高级块': [{
+    title: '表格',
     subTitle: '|Lorem | Ipsum is simply |',
     label: 'table',
     shortCut: `${SHIFT_KEY}+${COMMAND_KEY}+T`,
     icon: newTableIcon
   }, {
-    title: 'Display Math',
+    title: '数学公式块',
     subTitle: '$$ Lorem Ipsum is simply $$',
     label: 'mathblock',
     shortCut: `${OPTION_KEY}+${COMMAND_KEY}+M`,
     icon: mathblockIcon
   }, {
-    title: 'HTML Block',
+    title: 'HTML 块',
     subTitle: '<div> Lorem Ipsum is simply </div>',
     label: 'html',
     shortCut: `${OPTION_KEY}+${COMMAND_KEY}+J`,
     icon: htmlIcon
   }, {
-    title: 'Code Block',
+    title: '代码块',
     subTitle: '```java Lorem Ipsum is simply ```',
     label: 'pre',
     shortCut: `${OPTION_KEY}+${COMMAND_KEY}+C`,
     icon: codeIcon
   }, {
-    title: 'Quote Block',
+    title: '引用块',
     subTitle: '>Lorem Ipsum is simply ...',
     label: 'blockquote',
     shortCut: `${OPTION_KEY}+${COMMAND_KEY}+Q`,
     icon: quoteIcon
   }],
-  'list block': [{
-    title: 'Order List',
+  '列表': [{
+    title: '有序列表',
     subTitle: '1. Lorem Ipsum is simply ...',
     label: 'ol-order',
     shortCut: `${OPTION_KEY}+${COMMAND_KEY}+O`,
     icon: orderListIcon
   }, {
-    title: 'Bullet List',
+    title: '无序列表',
     subTitle: '- Lorem Ipsum is simply ...',
     label: 'ul-bullet',
     shortCut: `${OPTION_KEY}+${COMMAND_KEY}+U`,
     icon: bulletListIcon
   }, {
-    title: 'To-do List',
+    title: '任务列表',
     subTitle: '- [x] Lorem Ipsum is simply ...',
     label: 'ul-task',
     shortCut: `${OPTION_KEY}+${COMMAND_KEY}+X`,
     icon: todoListIcon
   }],
-  diagram: [{
-    title: 'Vega Chart',
+  '图表': [{
+    title: 'Vega 图表',
     subTitle: 'Render flow chart by vega-lite.js.',
     label: 'vega-lite',
     icon: vegaIcon
   }, {
-    title: 'Flow Chart',
+    title: '流程图',
     subTitle: 'Render flow chart by flowchart.js.',
     label: 'flowchart',
     icon: flowchartIcon
   }, {
-    title: 'Sequence Diagram',
+    title: '时序图',
     subTitle: 'Render sequence diagram by js-sequence.',
     label: 'sequence',
     icon: sequenceIcon
   }, {
-    title: 'PlantUML Diagram',
+    title: 'PlantUML 图表',
     subTitle: 'Render PlantUML diagrams',
     label: 'plantuml',
     icon: plantumlIcon

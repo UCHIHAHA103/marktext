@@ -15,21 +15,21 @@ const COMMAND_KEY = isOsx ? '⌘' : '⌃'
 export const menu = [{
   icon: copyIcon,
   label: 'duplicate',
-  text: 'Duplicate',
+  text: '复制段落',
   shortCut: `⇧${COMMAND_KEY}P`
 }, {
   icon: turnIcon,
   label: 'turnInto',
-  text: 'Turn Into'
+  text: '转换为'
 }, {
   icon: newIcon,
   label: 'new',
-  text: 'New Paragraph',
+  text: '新建段落',
   shortCut: `⇧${COMMAND_KEY}N`
 }, {
   icon: deleteIcon,
   label: 'delete',
-  text: 'Delete',
+  text: '删除',
   shortCut: `⇧${COMMAND_KEY}D`
 }]
 

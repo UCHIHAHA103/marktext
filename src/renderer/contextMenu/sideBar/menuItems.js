@@ -7,7 +7,7 @@ export const SEPARATOR = {
 }
 
 export const NEW_FILE = {
-  label: 'New File',
+  label: '新建文件',
   id: 'newFileMenuItem',
   click (menuItem, browserWindow) {
     contextMenu.newFile()
@@ -15,7 +15,7 @@ export const NEW_FILE = {
 }
 
 export const NEW_DIRECTORY = {
-  label: 'New Directory',
+  label: '新建文件夹',
   id: 'newDirectoryMenuItem',
   click (menuItem, browserWindow) {
     contextMenu.newDirectory()
@@ -23,7 +23,7 @@ export const NEW_DIRECTORY = {
 }
 
 export const COPY = {
-  label: 'Copy',
+  label: '复制',
   id: 'copyMenuItem',
   click (menuItem, browserWindow) {
     contextMenu.copy()
@@ -31,7 +31,7 @@ export const COPY = {
 }
 
 export const CUT = {
-  label: 'Cut',
+  label: '剪切',
   id: 'cutMenuItem',
   click (menuItem, browserWindow) {
     contextMenu.cut()
@@ -39,7 +39,7 @@ export const CUT = {
 }
 
 export const PASTE = {
-  label: 'Paste',
+  label: '粘贴',
   id: 'pasteMenuItem',
   click (menuItem, browserWindow) {
     contextMenu.paste()
@@ -47,7 +47,7 @@ export const PASTE = {
 }
 
 export const RENAME = {
-  label: 'Rename',
+  label: '重命名',
   id: 'renameMenuItem',
   click (menuItem, browserWindow) {
     contextMenu.rename()
@@ -55,7 +55,7 @@ export const RENAME = {
 }
 
 export const DELETE = {
-  label: 'Move To Trash',
+  label: '移到废纸篓',
   id: 'deleteMenuItem',
   click (menuItem, browserWindow) {
     contextMenu.remove()
@@ -63,7 +63,7 @@ export const DELETE = {
 }
 
 export const SHOW_IN_FOLDER = {
-  label: 'Show In Folder',
+  label: '在文件夹中显示',
   id: 'showInFolderMenuItem',
   click (menuItem, browserWindow) {
     contextMenu.showInFolder()
