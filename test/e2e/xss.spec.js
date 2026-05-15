@@ -15,7 +15,8 @@ test.describe('Test XSS Vulnerabilities', async () => {
   })
 
   test.afterAll(async () => {
-    await app.close()
+    // contextIsolation 启用后 app.close() 会等待 IPC 响应导致超时，直接强制退出
+    await app.evaluate(({ app }) => app.exit(0)).catch(() => {})
   })
 
   test('Load malicious document', async () => {
